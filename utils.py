@@ -139,7 +139,7 @@ def GetDataSet(input_file, num_samples=-1, samples_per_digit=2000):
                 all_channels = []
                 channels_cnt = 0
 
-    return np.array(x), np.array(y).astype(np.int), labels_hist
+    return np.array(x), np.array(y).astype(int), labels_hist
 
 
 def GetDataAndPreProcess(input_file, num_samples=-1, samples_per_digit=5000):
