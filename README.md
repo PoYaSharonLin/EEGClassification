@@ -1,11 +1,6 @@
-# EEGClassification
+# EEGClassification - updated CNN 
 
-This project proposes a CNN-based model, which is used to classify the visual evoked EEG signal and recognizes the image an individual is seeing at the time of EEG recording procedure. The proposed CNN model was able to classify the inputs extracted from the MindBigData dataset to identify 10 different classes based on the digit that the subject was viewing while the EEG was captured.  
-
-<p align="center">
-    <a href="https://www.linkedin.com/in/nitzan-bar-9ab896146/">Nitzan Bar</a>  •  
-    <a href="https://www.linkedin.com/in/priel-salomon-a6782a1b/">Priel Salomon</a>
-</p>
+This branch is a updated version of the forked project. We replace the old packages in the util.py and replace with the new ones. This branch aims to contribute to provide a newer version of the original work for future scholars to work on. 
 
 
 - [EEGClassification](#eeg-classification)
@@ -44,6 +39,8 @@ Brain locations:
 Each EEG device capture the signals via different sensors, located in these areas of the brain.
 We used EPOC with 14 channels, as described in the following figure, marked with blue colour.
 
+The below signals.PNG is the updated version run with the new EEGClassification.ipynb. 
+
 ![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/main/images/brain.PNG)
 ![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/main/images/signals.PNG)
 
@@ -71,13 +68,14 @@ The acquired average accuracy through proposed CNN architecture for stimuli evok
 The loss graph and confusion matrix of the proposed CNN model is shown below.
 The following table describes the comparison between some previous stimuli evoked EEG classification techniques along with their accuracy results and the associated stimuli that were used for acquiring the EEG signals. 
 
+The below graphs.PNG is the updated version run with the new EEGClassification.ipynb. 
+
 ![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/main/images/graphs.PNG)
 ![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/main/images/table.PNG)
 
 
 
 ## Presentation
-- [Recording](https://youtu.be/V5hxXmG1A9U) of in-class project presentation (Hebrew only)
 - Slides can be found [here](https://github.com/NitzanShitrit/EEGClassification/blob/main/slides.pptx)
 
 
