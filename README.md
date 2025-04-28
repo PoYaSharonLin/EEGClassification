@@ -1,7 +1,6 @@
 # EEGClassification
 
 This project proposes a CNN-based model, which is used to classify the visual evoked EEG signal and recognizes the image an individual is seeing at the time of EEG recording procedure. The proposed CNN model was able to classify the inputs extracted from the MindBigData dataset to identify 10 different classes based on the digit that the subject was viewing while the EEG was captured.  
-This is a class project as part of EE046211 - Deep Learning course @ Technion.  
 
 <p align="center">
     <a href="https://www.linkedin.com/in/nitzan-bar-9ab896146/">Nitzan Bar</a>  •  
