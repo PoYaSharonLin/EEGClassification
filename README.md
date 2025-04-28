@@ -29,7 +29,7 @@ Deep learning-based models have outperformed conventional methodologies that eli
 This report aims at providing a CNN-based framework for classification of visually evoked stimuli. Figure 1 describes the overall workflow of the proposed architecture. 
 As a very initial step, we have explored the utilization of CNNs for multi-classification of EEG signals recorded while a subject is viewing image of digits from 0 to 9 as stimuli. In the second step, the acquired EEG signals are then pre-processed using basic filtering process in order to remove artifacts. The EEG signals are then used as input to the proposed CNN model for a 10-class classification task representing the 10 different digits (0–9). 
 
-![intro](https://github.com/NitzanShitrit/EEGClassification/blob/updated-CNN/images/intro.PNG)
+![intro](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN/images/intro.PNG)
 
 
 
@@ -41,8 +41,8 @@ We used EPOC with 14 channels, as described in the following figure, marked with
 
 The below signals.PNG is the updated version run with the new EEGClassification.ipynb. 
 
-![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/updated-CNN/images/brain.PNG)
-![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/updated-CNN/images/signals.PNG)
+![alt text](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN/images/brain.PNG)
+![alt text](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN/images/signals.PNG)
 
 
 
@@ -50,7 +50,7 @@ The below signals.PNG is the updated version run with the new EEGClassification.
 The network is composed of five convolution blocks and fully connected layers. Each convolution block consists of a convolution layer, a batch normalization, and an exponential linear unit, as shown in the following figure. 
 An illustration of the proposed network is shown below:
 
-![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/updated-CNN/images/cnn.PNG)
+![alt text](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN/images/cnn.PNG)
 
 C1 and C2 blocks were designed to extract the spectral representation of the EEG input, as it performs convolution across the time dimension, capturing features from each EEG channel independently from the others.
 
@@ -70,13 +70,13 @@ The following table describes the comparison between some previous stimuli evoke
 
 The below graphs.PNG is the updated version run with the new EEGClassification.ipynb. 
 
-![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/updated-CNN/images/graphs.PNG)
-![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/updated-CNN/images/table.PNG)
+![alt text](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN/images/graphs.PNG)
+![alt text](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN/images/table.PNG)
 
 
 
 ## Presentation
-- Slides can be found [here](https://github.com/NitzanShitrit/EEGClassification/blob/updated-CNN/slides.pptx)
+- Slides can be found [here](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN/slides.pptx)
 
 
 ## References
