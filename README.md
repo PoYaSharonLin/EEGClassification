@@ -73,7 +73,7 @@ The loss graph and confusion matrix of the proposed CNN model is shown below.
 The following table describes the comparison between some previous stimuli evoked EEG classification techniques along with their accuracy results and the associated stimuli that were used for acquiring the EEG signals. 
 
 ![alt text](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN%2BBandPass%2BNormalization/images/graphs.PNG)
-![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/main/images/table.PNG)
+![alt text](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN%2BBandPass%2BNormalization/images/table.PNG)
 ![alt text](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN%2BBandPass%2BNormalization/images/signal_comparison_psd.png)
 ![alt text](https://github.com/PoYaSharonLin/EEGClassification/blob/updated-CNN%2BBandPass%2BNormalization/images/signal_comparison_time.png)
 
