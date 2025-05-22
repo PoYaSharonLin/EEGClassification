@@ -3,11 +3,17 @@ import numpy as np
 import csv
 import cv2
 from torch.utils.data import Dataset, DataLoader
+import scipy
 from scipy import signal
 import pandas as pd
 from torchvision import transforms
 from sklearn.model_selection import train_test_split
 from torch.utils.data.sampler import SubsetRandomSampler
+
+# for plotting 
+import matplotlib.pyplot as plt
+# for data normalization
+from scipy.stats import zscore
 
 
 class MindBigData(Dataset):
@@ -15,12 +21,12 @@ class MindBigData(Dataset):
     def __init__(self, inputs, labels, transform=None):
         """
         Args:
-            inputs (2D np array): Contains EEG signals from different channels
+            inputs (2D np array of float): Contains EEG signals from different channels
             labels (np array): digit seen by patient
             transform (callable, optional): Optional transform to be applied on a sample.
         """
         self.labels = labels
-        self.inputs = inputs
+        self.inputs = inputs.astype(np.float32)
         self.transform = transform
 
     def __len__(self):
@@ -58,6 +64,29 @@ class EEGImagesDataset(Dataset):
             label = self.target_transform(label)
 
         return image, label
+
+def preprocess_signal(sig, fs=128, lowcut=0.5, highcut=50, order=4):
+    """
+    Applies bandpass filtering and normalization to a single EEG signal.
+    
+    Parameters:
+    - signal: 1D array, the raw EEG signal.
+    - fs: float, sampling frequency in Hz (default: 128 Hz).
+    - lowcut: float, low cutoff frequency in Hz (default: 0.5 Hz).
+    - highcut: float, high cutoff frequency in Hz (default: 50 Hz).
+    - order: int, order of the Butterworth filter (default: 4).
+    
+    Returns:
+    - filtered: 1D array, bandpass filtered signal.
+    - normalized: 1D array, z-score normalized signal.
+    """
+    nyq = 0.5 * fs
+    low = lowcut / nyq
+    high = highcut / nyq
+    sos = scipy.signal.butter(order, [low, high], btype='band', output='sos')
+    filtered = scipy.signal.sosfilt(sos, sig)
+    normalized = zscore(filtered)
+    return filtered, normalized
 
 
 def GetDataSet(input_file, num_samples=-1, samples_per_digit=2000):
@@ -139,25 +168,45 @@ def GetDataSet(input_file, num_samples=-1, samples_per_digit=2000):
                 all_channels = []
                 channels_cnt = 0
 
-    return np.array(x), np.array(y).astype(np.int), labels_hist
+    return np.array(x), np.array(y).astype(int), labels_hist
 
 
-def GetDataAndPreProcess(input_file, num_samples=-1, samples_per_digit=5000):
+def GetDataAndPreProcess(input_file, num_samples=-1, samples_per_digit=5000, return_raw=False):
     """
     get data set and perform pre-processing
     :param input_file: input file to read data from
     :param num_samples: number of samples(lines) to read from the file
     :param samples_per_digit: number of samples per digit
-    :return: x, y
+    :param return_raw: bool, if True, also returns raw data (default: False)
+    :return: x_normalized, y, raw_data (if return_raw=True)
     """
     # Read train and test datasets from file
     x, y, labels_hist = GetDataSet(input_file=input_file, num_samples=num_samples, samples_per_digit=samples_per_digit)
     print(labels_hist)
 
     # Pre-Process data
-    x = PreProcess(x)
+    x_preprocessed = PreProcess(x)
 
-    return x, y
+    # Apply bandpass filtering and normalization
+    x_filtered = []
+    x_normalized = []
+    for sample in x_preprocessed:
+        filtered_sample = []
+        normalized_sample = []
+        for channel in sample:
+            filtered, normalized = preprocess_signal(channel)
+            filtered_sample.append(filtered)
+            normalized_sample.append(normalized)
+        x_filtered.append(np.array(filtered_sample))
+        x_normalized.append(np.array(normalized_sample))
+
+    # ensure output is compatible with bias (float32)
+    x_filtered = np.array(x_filtered, dtype=np.float32)
+    x_normalized = np.array(x_normalized, dtype=np.float32)
+
+    if return_raw:
+        return x_normalized, y, x
+    return x_normalized, y
 
 
 def GetDataLoaders(x, y, batch_size=64):
