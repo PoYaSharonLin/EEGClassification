@@ -1,35 +1,21 @@
 # EEGClassification
 
-This project proposes a CNN-based model, which is used to classify the visual evoked EEG signal and recognizes the image an individual is seeing at the time of EEG recording procedure. The proposed CNN model was able to classify the inputs extracted from the MindBigData dataset to identify 10 different classes based on the digit that the subject was viewing while the EEG was captured.  
-This is a class project as part of EE046211 - Deep Learning course @ Technion.  
+This project built upon the CNN-based model forked by the original author. The goal of this project is to dive into how different artifact removal methods affect the ICA labeling result and the CNN mdoel accuracy. 
 
-<p align="center">
-    <a href="https://www.linkedin.com/in/nitzan-bar-9ab896146/">Nitzan Bar</a>  •  
-    <a href="https://www.linkedin.com/in/priel-salomon-a6782a1b/">Priel Salomon</a>
-</p>
-
+This is a class project as part of 11320ISA557300 - Brain Computer Interfaces: Fundamentals and Application @ National Tsing Hua University.  
 
 - [EEGClassification](#eeg-classification)
-  * [Files in The Repository](#files-in-the-repository)
-  * [Introduction](#introduction)
-  * [Dataset Acquisition](#dataset-acquisition) 
-  * [Proposed CNN Model](#proposed-cnn-model)
-  * [Results](#results)
-  * [Presentation](#presentation)
-  * [References](#references)
+  * [1. Introduction](#introduction)
+  * [2. Data Description](#files-in-the-repository)
+  * [3. ICA & ICA Labeling Table](#introduction)
+  * [4. Code](#code)
+  * [5. Model Framework](#proposed-cnn-model)
+  * [6. Validation & Usage](#results)
+  * [7. Presentation](#presentation)
+  * [8. References](#references)
 
 
-
-## Files in the repository
-|File name         | Purpsoe |
-|----------------------|------|
-|`EEGClassification.ipynb`| main file - Jupiter Notebook format|
-|`utils.py`| utils functions for loading and pre-processing the data|
-|`images`| Images used for preview in README.md file|
-
-
-
-## Introduction
+## 1. Introduction
 Vision is one of the most significant parts in the human perception framework. When the eyes get visual incitement, neural spikes are delivered to the brain. The interpretation of these neural spikes is becoming an interesting research work in the era of computer vision. Paradigms leveraging stimuli evoked EEG signal have been used to investigate and analyse the complexity of EEG signal for object detection and for classification tasks using machine learning methods. 
 Deep learning-based models have outperformed conventional methodologies that eliminate the manual feature extraction step. Convolutional neural networks (CNNs) specifically have become a famous deep learning-based approach for learning discriminative features for classification tasks. Past experiments at applying CNNs to stimuli evoked EEG signal classification have utilized domain specific feature representations to decrease the required information for classification. 
 This report aims at providing a CNN-based framework for classification of visually evoked stimuli. Figure 1 describes the overall workflow of the proposed architecture. 
@@ -39,7 +25,9 @@ As a very initial step, we have explored the utilization of CNNs for multi-class
 
 
 
-## Dataset Acquisition
+
+
+## 2. Dataset Description
 [MindBigData](http://www.mindbigdata.com/) (The “MNIST” of Brain Digits) is an open database containing 1,207,293 brain signals of 2s each, captured with the stimulus of seeing a digit (from 0 to 9) and thinking about it. The raw EEG signals were captured 128 Hz sampling rate, so there are approximately 256 (128 × 2 secs) data points for each stimulus image of digit 0–9 [1]. In this project, 6500 trails for each digit image, with each trail containing 256 samples for 14 electrode positions, have been used. Overall, 65,000 samples been used, 75% were utilized for training, 15% for validation and 10% was utilized for testing.
 Brain locations:
 Each EEG device capture the signals via different sensors, located in these areas of the brain.
@@ -48,9 +36,26 @@ We used EPOC with 14 channels, as described in the following figure, marked with
 ![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/main/images/brain.PNG)
 ![alt text](https://github.com/NitzanShitrit/EEGClassification/blob/main/images/signals.PNG)
 
+## 3. ICA & ICA Labeling Table
+| Pre-processing                                  |   |   | Numbers of ICs classified by ICLabel         |   |   |   |   |   |   |
+|-------------------------------------------------|---|---|-----------------------------------------------|---|---|---|---|---|---|
+| EEG (? Channels & ? Datasets)                   | bandpass filter | ASR | Brain | Muscle | Eye | Heart | Line Noise | Channel Noise | Other |
+| raw                                             |    |    |       |        |     |       |            |              |       |
+| filtered                                        | v  |    |       |        |     |       |            |              |       |
+| ASR-corrected                                   | v  | v  |       |        |     |       |            |              |       |
 
 
-## Proposed CNN Model
+
+## 4. Code
+|File name         | Purpsoe |
+|----------------------|------|
+|`EEGClassification.ipynb`| main file - Jupiter Notebook format|
+|`utils.py`| utils functions for loading and pre-processing the data|
+|`images`| Images used for preview in README.md file|
+
+
+
+## 5. Model Framework
 The network is composed of five convolution blocks and fully connected layers. Each convolution block consists of a convolution layer, a batch normalization, and an exponential linear unit, as shown in the following figure. 
 An illustration of the proposed network is shown below:
 
@@ -66,7 +71,7 @@ Therefore, we used it after convolution blocks C3 and C5, with the dropout set t
 
 
 
-## Results
+## 6. Validation & Usage
 The proposed CNN model was compiled in Google COLAB using PyTorch packages with 200 epochs. 
 The acquired average accuracy through proposed CNN architecture for stimuli evoked EEG signals of classification MindBigData dataset is 21.5%. 
 The loss graph and confusion matrix of the proposed CNN model is shown below.
@@ -79,12 +84,12 @@ The following table describes the comparison between some previous stimuli evoke
 
 
 
-## Presentation
+## 7. Presentation
 - [Recording](https://youtu.be/V5hxXmG1A9U) of in-class project presentation (Hebrew only)
 - Slides can be found [here](https://github.com/NitzanShitrit/EEGClassification/blob/main/slides.pptx)
 
 
-## References
+## 8. References
 *	Mindbigdata dataset. http://www.mindbigdata.com/ (2018)
 *	Henry, J. Craig. "Electroencephalography: basic principles, clinical applications, and related fields." Neurology 67.11 (2006): 2092-2092. 
 *	Bird, Jordan J., et al. "A deep evolutionary approach to bioinspired classifier optimisation for brain-machine interaction." Complexity 2019 (2019).
