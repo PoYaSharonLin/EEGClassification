@@ -132,6 +132,8 @@ For raw data, we expect the EEG signal to be relatively noisy and contains some 
 
 
 3. Scalp Plot 
+\
+
 ![Alpha-scalp](https://github.com/poyasharonlin/EEGClassification/blob/updated-CNN/images/Alpha_scalp.PNG)
 
 ![Beta-scalp](https://github.com/poyasharonlin/EEGClassification/blob/updated-CNN/images/Beta_scalp.PNG)
